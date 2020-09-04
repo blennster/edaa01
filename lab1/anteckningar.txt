@@ -1,0 +1,53 @@
+F1, Felmeddelanden:
+1.
+    NullPointerException, finns en variabel som är null och en medtod försöker anropas.
+    Felet finns i machineWithLeastToDo på rad 19.
+    Felet var att attributen skuggades av en ny variabeldeklaration.
+2.
+    ArrayIndexOutOfBoundsException, Ett ogiltilgt index används.
+    Felet finns i printSchedule på rad 49.
+    Felet var ett = i for loopens defintion.
+    Talet i felet visar vilket index som inte var giltligt.
+
+F2,
+Fel fanns i DescTimeComp på rad 8. t1 och t2 ska byta plats
+Fel fanns i Machinge på rad 20. Det saknades ett plus.
+
+F3,
+En prioriterad kö kan användas.
+
+F4,
+a) 20 ggr, ja
+b) 10 ggr, nej, Set garanterar inte någon ordning.
+c) <String, Integer>, 12
+d) containsKey(Object key)
+
+F5 -,
+
+F6,
+D1: -
+D2: == användes iställed för equals
+D3: -
+D4: - (Inte riktigt den lösningen som söks men lite förbättrad)
+D5: -
+D6: -
+D7: -
+D8: -
+D9: -
+D10: -
+D11: Kan sorteras i stiangde eller fallande ordning
+D12: -
+D13: 534 629 687 (ms)
+D14:
+    TreeMap gör att MultiWordCounter skriver ut i bokstavsordning.
+    578 723 734
+D15:
+    * Map är ett interface medans HashMap är en konkret implementation.
+    * HashMap är inte sorterad men har en O(1) tidskomplexitet och TreeMap är sorterad i naturlig ordning
+    men har en tidskomplexitet på O(log(n))
+    * Map används för att koppla samman en nyckel och ett värde och gör det effektivt då t.ex. HashMap är O(1)
+    vilket är snabbare än att söka igenom en vektor varje gång ett värdet ska ändras vilket är O(n).
+    Set lagrar enbart varje unikt element. Det är även ett effektivt sätt att kolla ifall ett element ingår i mängden
+    med en tidskomplexitet på O(1) (HashSet) jämför med en linjärsökning på O(n).
+    * Java använder comparator interface för att jämföra om något är större eller mindre och sedan sorterar med
+    insättningssortering eller quicksort beroende på listans längd.x

@@ -1,0 +1,22 @@
+F1, -
+F2,
+    a, null
+    b, last.next
+    c, last.next.element
+F3,
+
+D1, Koden som står i FifoQueue
+D2, -
+D3, Koden som står i FifoQueue i singellinkedlist
+D4, Använder flagga för att få hasNext att funka
+D5, Koden i append
+D6, Koden i TestAppendFifoQueue
+D7,
+    - Ja, det går
+    - Det beror på den underliggande implementeringen för queue. Ifall det är en vektor så kommer
+    den vara snabbare att nå element då de ligger i sekvens i minnet men då vektorn blir för liten och behöver
+    uttökas kommer det påverka prestandan det tillfället. En cirkulär lista så som den är implementerad här
+    är beroende av javas GC vilket gör att gamla referenser kan ta plats i minnet när de inte används.
+    - Det är alltid mer lämpligt sålänge det inte finns något speciellt krav som de inte uppfyller.
+    - Nej, man kan bara veta att den har grönt ljus för de testfallen. Ett bra test testar så många fall att
+    klassen kan anses felfri men det är svårt att skriva.

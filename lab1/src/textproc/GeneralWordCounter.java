@@ -3,7 +3,7 @@ package textproc;
 import java.util.*;
 
 public class GeneralWordCounter implements TextProcessor{
-    private Map<String, Integer> words = new TreeMap<>();
+    private Map<String, Integer> words = new HashMap<>();
     private Set<String> exceptions;
 
     public GeneralWordCounter(Set<String> exceptions) {
@@ -40,5 +40,9 @@ public class GeneralWordCounter implements TextProcessor{
             }
         }*/
         System.out.print(sb.toString());
+    }
+
+    public List<Map.Entry<String, Integer>> getWordList() {
+        return new ArrayList<>(words.entrySet());
     }
 }

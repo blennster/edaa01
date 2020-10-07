@@ -4,6 +4,8 @@ F2,
     b, last.next
     c, last.next.element
 F3,
+    a, assertFalse
+    b, assertArrayEquals
 
 D1, Koden som står i FifoQueue
 D2, -

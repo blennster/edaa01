@@ -34,6 +34,7 @@ class TestAppendFifoQueue {
     @Test
     void testEmptyConcat() {
         myIntQueue1.append(myIntQueue2);
+        // Använder size() istället för isEmpty() då den använder size
         assertEquals(0, myIntQueue1.size());
     }
 

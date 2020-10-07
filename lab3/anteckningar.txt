@@ -1,2 +1,36 @@
 F1, -
-F2, 
+F2, entrySet()
+F3, (e1, e2) -> e2.value().compareTo(e1.value())
+    alt.
+    (e1, e2) -> e2.value() - e1.value()
+F4,
+    addActionListener()
+    getText()
+    add()
+    setSelectedIndex()
+F5, -
+
+D1, Kod i GeneralWordCounter
+D2, Kod i BookReaderController
+D3, Kod i BookReaderApplication
+D4, Kod i BookReaderController
+D5, Kod i BookReaderController
+D6, Kod i BookReaderController (ersatt av D7)
+D7, Kod i BookReaderController
+D8, Kod i BookReaderController
+D9,
+    V1, trim() och uppercase
+    V2, JOptionPane.showMessageDialog()
+    V3, addActionListener på textfield och button.doClick()
+    V4, JRadioButton kod
+
+D10,
+    - De använder events och det innebär att man anger vilken kod som ska köras när något
+    händer sen ser swing till att den koden anropas när den behöver. Man behöver
+    alltså inte oroa sig hur den koden anropas, det är bara ett kontrakt som säger
+    att när x händer så kommer y exekveras.
+    - Lambdauttryck funkar bra för det är ett kort och konsist sätt att skriva miniklasser.
+    De kan också använda variabler som finns det blocket man jobbar i vilket innebär
+    att variabler inte behöver skickas som parametrar.
+    -  SortedListModel säger till att den har ändrats och då vet swing att den behöver uppdatera
+    vad den vet om listan eftersom den inte är samma som innan.

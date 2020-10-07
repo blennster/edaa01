@@ -64,6 +64,7 @@ public class FifoQueue<E> extends AbstractQueue<E> implements Queue<E> {
 			QueueNode<E> first = this.last.next;
 			this.last.next = first.next;
 			this.size--;
+			if (this.size == 0) this.last = null;
 			return first.element;
 		}
 	}

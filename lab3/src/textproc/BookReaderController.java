@@ -2,17 +2,51 @@ package textproc;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Map;
+import java.util.List;
 
 public class BookReaderController {
+    private ActionListener actionListener;
+
+    public JFrame getFrame() {
+        return frame;
+    }
+
+    private JFrame frame;
+
     public BookReaderController(GeneralWordCounter counter) {
-        SwingUtilities.invokeLater(() -> createWindow(counter, "BookReader", 100, 300));
+        SwingUtilities.invokeLater(() -> createWindow(counter, "BookReader", 250, 300));
+    }
+
+    public void reload(GeneralWordCounter counter) {
+        frame.setVisible(false);
+        frame.dispose();
+        SwingUtilities.invokeLater(() -> createWindow(counter, "BookReader", 250, 300));
+    }
+
+    public void addNewFileListener(ActionListener listener) {
+        actionListener = listener;
+    }
+
+    private void notifyNewFileListeners() {
+        if (actionListener != null) actionListener.actionPerformed(null);
     }
 
     private void createWindow(GeneralWordCounter counter, String title, int width, int height) {
-        JFrame frame = new JFrame(title);
+        frame = new JFrame(title);
         frame.setPreferredSize(new Dimension(width, height));
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JMenuBar menuBar = new JMenuBar();
+        JMenu menu = new JMenu("File");
+        JMenuItem menuItem = new JMenuItem("Open...");
+        menuItem.addActionListener((e) -> notifyNewFileListeners());
+        menu.add(menuItem);
+        menuBar.add(menu);
+
+        frame.setJMenuBar(menuBar);
 
         Container pane = frame.getContentPane();
         //pane.setLayout(new BoxLayout(pane, BoxLayout.Y_AXIS));
@@ -72,9 +106,10 @@ public class BookReaderController {
             }
             if (idx == -1)
                 JOptionPane.showMessageDialog(frame, "Detta ord fanns inte i boken");
-            else
+            else {
                 list.setSelectedIndex(idx);
-            //list.ensureIndexIsVisible(idx);
+                list.ensureIndexIsVisible(idx);
+            }
         });
         search.add(searchField);
         search.add(searchButton);

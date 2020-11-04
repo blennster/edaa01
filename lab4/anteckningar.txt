@@ -1,0 +1,12 @@
+F1, -
+F2,
+    a) 768 linjer
+    b) 3,16
+F3, -
+F4, -
+
+D1, -
+D2, Koden fractalLine i Koch.java
+D3, Koden i Mountain.java
+D4, Det uppkommer hål då det beräknas nya sidor
+D5, Löst men blev klurigt med variabelnamn

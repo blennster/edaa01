@@ -3,9 +3,7 @@ package textproc;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.Map;
-import java.util.List;
 
 public class BookReaderController {
     private ActionListener actionListener;
@@ -72,6 +70,7 @@ public class BookReaderController {
          */
         ButtonGroup group = new ButtonGroup();
         JRadioButton alphabetic = new JRadioButton("Alphabetic");
+
         alphabetic.setSelected(true);
         JRadioButton frequency = new JRadioButton("Frequency");
         JButton sort = new JButton("Sort");

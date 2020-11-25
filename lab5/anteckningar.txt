@@ -1,0 +1,24 @@
+F1
+    a, 10, 20, 30, 47
+    b, 3
+    c, 4
+F2,
+    a, Om trädet är tomt är höjden 0, annars är höjden 1 + Max.(vänster höjd, höger höjd)
+    b, max
+F3, int mid = first + (last - first) / 2
+F4, -
+F5, -
+F6, -
+
+D1, Konstruktorn som tar en comparator
+D2, Rekursiv metod getHeight
+D3, Rekursiva add metoden
+D4, Rekusriv traverse metod
+D5, Tester
+D6, Main metod
+D7, Koden i buildTree
+D8,
+    - De båda behövs för att en rekursiv metod behöver ha noderna som parameter
+    medans användaren inte ska behöva konstruera noder.
+    - Linked list hade inte funkat lika bra då man behöver nå specifika element i listan.
+

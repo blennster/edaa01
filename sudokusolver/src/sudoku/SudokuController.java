@@ -5,12 +5,12 @@ import java.awt.*;
 
 public class SudokuController {
     private JFrame frame;
-    private Solver solver;
-    private SudokuView view;
+    private final SudokuSolver solver;
+    private SudokuBoard view;
 
     public SudokuController() {
-        SwingUtilities.invokeLater(() -> createWindow("Sudoku", 300, 350));
         solver = new Solver();
+        SwingUtilities.invokeLater(() -> createWindow("Sudoku", 300, 350));
     }
 
     private void createWindow(String name, int width, int height) {
@@ -21,31 +21,33 @@ public class SudokuController {
         Container pane = frame.getContentPane();
         pane.setLayout(new BorderLayout());
 
-        view = new SudokuView(solver, frame);
+        view = new SudokuBoard();
 
         JPanel btnPane = new JPanel();
         btnPane.setLayout(new FlowLayout(FlowLayout.LEFT));
         JButton clearBtn = new JButton("Clear");
         clearBtn.addActionListener(e -> {
             solver.clear();
-            view.updateView(solver.getNumbers());
+            view.setNumbers(solver.getNumbers());
         });
         btnPane.add(clearBtn);
         JButton solveBtn = new JButton("Solve");
-        solveBtn.addActionListener(e -> {
-            solver.setNumbers(view.getNumbers());
-            if (solver.preCheck() && solver.solve()) {
-                view.updateView(solver.getNumbers());
-            } else {
-                JOptionPane.showMessageDialog(frame, "No solution was found.");
+        solveBtn.addActionListener(event -> {
+            try {
+                solver.setNumbers(view.getNumbers());
+                if (solver.solve()) {
+                    view.setNumbers(solver.getNumbers());
+                } else {
+                    JOptionPane.showMessageDialog(frame, "No solution was found.");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(frame, e.getMessage());
             }
         });
         btnPane.add(solveBtn);
 
         pane.add(view);
         pane.add(btnPane, BorderLayout.PAGE_END);
-        solver.solve();
-        view.updateView(solver.getNumbers());
 
         frame.pack();
         frame.setVisible(true);

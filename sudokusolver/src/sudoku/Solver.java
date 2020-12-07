@@ -3,6 +3,9 @@ package sudoku;
 import java.util.ArrayList;
 import java.util.HashSet;
 
+/**
+ * Den här klassen implementerar interfacet SudokuSolver och löser sudoku.
+ */
 public class Solver implements SudokuSolver {
     private int[][] board;
     private int backtrackcnt = 0;
@@ -19,6 +22,15 @@ public class Solver implements SudokuSolver {
         return inRange(row, col) && number > 0 && number <= 9;
     }
 
+    /**
+     * Sätter siffran i rutan row, col
+     *
+     * @param row    raden
+     * @param col    kolumnen
+     * @param number Siffran som ska sättas in
+     * @throws IllegalArgumentException om siffran är utanför [1..9]
+     *                                  eller row eller col är utanför [0..8]
+     */
     @Override
     public void setNumber(int row, int col, int number) {
         if (inRange(row, col, number)) {
@@ -28,6 +40,17 @@ public class Solver implements SudokuSolver {
         }
     }
 
+    /**
+     * Kollar om siffran number kan sättas i raden row och kolumnen col, om det inte
+     * går enligt spelreglerna returneras false
+     *
+     * @param row    raden
+     * @param col    kolumnen
+     * @param number Siffran som ska testas
+     * @return True ifall det är ett tillåtet drag.
+     * @throws IllegalArgumentException om siffran är utanför [1..9] eller om row
+     *                                  eller col är utanför [0..8]
+     */
     @Override
     public boolean trySetNumber(int row, int col, int number) {
         if (!inRange(row, col, number)) {
@@ -82,6 +105,14 @@ public class Solver implements SudokuSolver {
         return numbers.size() == (new HashSet<>(numbers)).size();
     }
 
+    /**
+     * Returnerar siffran på raden row och kolumnen col.
+     *
+     * @param row    raden
+     * @param col    kolumnen
+     * @return Siffran i på raden row och kolumnen col.
+     * @throws IllegalArgumentException om row eller col är utanför [0..8]
+     */
     @Override
     public int getNumber(int row, int col) {
         if (inRange(row, col)) {
@@ -91,6 +122,13 @@ public class Solver implements SudokuSolver {
         }
     }
 
+    /**
+     * Tar bort siffran på raden row och kolumnen col.
+     *
+     * @param row    raden
+     * @param col    kolumnen
+     * @throws IllegalArgumentException om row eller col är utanför [0..8]
+     */
     @Override
     public void removeNumber(int row, int col) {
         if (inRange(row, col)) {
@@ -100,11 +138,18 @@ public class Solver implements SudokuSolver {
         }
     }
 
+    /**
+     * Tömmer hela sudokut
+     */
     @Override
     public void clear() {
         board = new int[9][9];
     }
 
+    /**
+     * Löser sudokut och returnerar true om sudokut går att lösa.
+     * @return True om en lösning hittades.
+     */
     @Override
     public boolean solve() {
         backtrackcnt = 0;
@@ -153,28 +198,28 @@ public class Solver implements SudokuSolver {
         return status;
     }
 
+    /**
+     * Returnerar siffrorna i sudokut.
+     * @return Siffrorna i sudokut.
+     */
     @Override
     public int[][] getNumbers() {
         return board;
     }
 
+    /**
+     * Fyller i siffrorna i numbers i sudokut.
+     *
+     * @param numbers Siffrorna som ska sättas in
+     * @throws IllegalArgumentException om inte alla nummer är i [0..9]
+     **/
     @Override
     public void setNumbers(int[][] numbers) {
-        board = numbers;
-    }
-
-    public boolean preCheck() {
-        try {
-            for (int i = 0; i < 9; i++) {
-                for (int j = 0; j < 9; j++) {
-                    if (board[i][j] != 0) {
-                        trySetNumber(i, j, board[i][j]);
-                    }
-                }
+        for (int[] row: numbers) {
+            for (int col: row) {
+                if (col > 9 || col < 0) throw new IllegalArgumentException();
             }
-        } catch (Exception e) {
-            return false;
         }
-        return true;
+        board = numbers;
     }
 }

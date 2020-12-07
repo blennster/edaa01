@@ -1,0 +1,27 @@
+F1,
+    a, String
+    b, Integer
+    c,
+        null 0
+        43 1
+        42 1
+F2, -
+F3, -
+
+D1, SimpleHashMap.java
+D2, Entry klassen
+D3, Konstruktor och attribut
+D4, Metoden show
+D5, size och empty
+D6, Hjälpmetoder index och find
+D7, Metoden put
+D8, Metoden get
+D9, Tester
+D10, Main metoden?
+D11, Remove metoden
+D12,
+    - Det som orsakar kollisoner är när hashen är samma men inte nyckel
+    - Equals jämför nycklar och hashCode ger en hash.
+D13,
+    En träd struktur
+

@@ -8,7 +8,6 @@ import java.util.HashSet;
  */
 public class Solver implements SudokuSolver {
     private int[][] board;
-    private int backtrackcnt = 0;
 
     public Solver() {
         board = new int[9][9];
@@ -18,7 +17,7 @@ public class Solver implements SudokuSolver {
         return row >= 0 && row < 9 && col >= 0 && col < 9;
     }
 
-    private boolean inRange (int row, int col, int number) throws IllegalArgumentException {
+    private boolean inRange (int row, int col, int number) {
         return inRange(row, col) && number > 0 && number <= 9;
     }
 
@@ -72,7 +71,7 @@ public class Solver implements SudokuSolver {
         rowNum.add(number);
         colNum.add(number);
 
-        // Check if any value is duplicated
+        // Kolla ifall någon siffra är upprepad
         if (rowNum.size() != (new HashSet<>(rowNum)).size() ||
             colNum.size() != (new HashSet<>(colNum)).size()) isValid = false;
 
@@ -152,7 +151,6 @@ public class Solver implements SudokuSolver {
      */
     @Override
     public boolean solve() {
-        backtrackcnt = 0;
         return solve(0, 0);
     }
 
@@ -162,40 +160,32 @@ public class Solver implements SudokuSolver {
             for (int i = 1; i <= 9; i++) {
                 if (trySetNumber(r, c, i)) {
                     setNumber(r, c, i);
-                    if (c == 8 && r == 8) { // Sista rutan
-                        status = true;
-                    }
-                    else if (c == 8) {
-                        status = solve(r+1, 0);
-                    } else {
-                        status = solve(r, c+1);
-                    }
-                    if (status) {
-                        break;
-                    }
-                }
-            }
-        } else {
-            if (trySetNumber(r, c, board[r][c])) {
-                if (c == 8 && r == 8) { // Sista rutan
-                    status = true;
-                }
-                else if (c == 8) {
-                    status = solve(r+1, 0);
-                } else {
-                    status = solve(r, c+1);
+                    status = nextCell(r, c);
+
+                    // Stanna loopen
+                    if (status)  break;
                 }
             }
             if (!status) {
-                return false;
+                board[r][c] = 0;
+            }
+        } else {
+            if (trySetNumber(r, c, board[r][c])) {
+                status = nextCell(r, c);
             }
         }
-        if (!status) {
-            board[r][c] = 0;
-            backtrackcnt++;
-            System.out.printf("[BACKTRACK:%d] r: %d, c: %d\n", backtrackcnt, r, c);
-        }
         return status;
+    }
+
+    private boolean nextCell(int r, int c) {
+        if (c == 8 && r == 8) { // Sista rutan
+            return  true;
+        }
+        else if (c == 8) {
+            return solve(r+1, 0);
+        } else {
+            return solve(r, c+1);
+        }
     }
 
     /**
@@ -204,7 +194,7 @@ public class Solver implements SudokuSolver {
      */
     @Override
     public int[][] getNumbers() {
-        return board;
+        return board.clone();
     }
 
     /**

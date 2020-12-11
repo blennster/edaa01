@@ -10,7 +10,7 @@ public class SimpleHashMap<K, V> implements Map<K, V> {
     public static void main(String[] args) {
         SimpleHashMap<Integer, Integer> map = new SimpleHashMap<>(10);
         Random rnd = new Random(100);
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 15; i++) {
             int rndNbr = rnd.nextInt(20);
             map.put(rndNbr, rndNbr);
         }
@@ -106,6 +106,8 @@ public class SimpleHashMap<K, V> implements Map<K, V> {
                     entry = entry.next;
                 }
                 sb.append("\n");
+            } else {
+                sb.append("null").append("\n");
             }
         }
 

@@ -8,8 +8,8 @@ public class SudokuController {
     private final SudokuSolver solver;
     private SudokuBoard view;
 
-    public SudokuController() {
-        solver = new Solver();
+    public SudokuController(SudokuSolver solver) {
+        this.solver = solver;
         SwingUtilities.invokeLater(() -> createWindow("Sudoku", 300, 350));
     }
 
